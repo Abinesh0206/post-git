@@ -1,12 +1,11 @@
 apiVersion: v2
-name: gitlab-postgresql-chart
-description: Helm chart to deploy GitLab and PostgreSQL
+name: gitlab-chart
+description: Helm chart to deploy GitLab and connect it to PostgreSQL
 type: application
 version: 0.1.0
 appVersion: "latest"
 
 dependencies:
-  - name: postgresql-chart
-    version: 0.1.0
-  - name: gitlab-chart
-    version: 0.1.0
+  - name: postgresql
+    version: "10.3.0"  # Specify the version you need, or leave it for the latest
+    repository: "https://charts.helm.sh/stable"
