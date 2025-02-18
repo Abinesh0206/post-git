@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gitlab
-  labels:
-    app: gitlab
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.gitlab.replicaCount }}
   selector:
     matchLabels:
       app: gitlab
@@ -15,17 +13,12 @@ spec:
         app: gitlab
     spec:
       containers:
-      - name: gitlab
-        image: {{ .Values.gitlab.image }}
-        ports:
-        - containerPort: {{ .Values.gitlab.port }}
-        env:
-        - name: GITLAB_OMNIBUS_CONFIG
-          value: |
-            external_url 'http://gitlab.local'
-            gitlab_rails['db_adapter'] = 'postgresql'
-            gitlab_rails['db_host'] = '{{ .Values.postgresql.host }}'
-            gitlab_rails['db_port'] = {{ .Values.postgresql.port }}
-            gitlab_rails['db_username'] = '{{ .Values.postgresql.username }}'
-            gitlab_rails['db_password'] = '{{ .Values.postgresql.password }}'
-            gitlab_rails['db_database'] = '{{ .Values.postgresql.database }}'
+        - name: gitlab
+          image: "{{ .Values.gitlab.image.repository }}:{{ .Values.gitlab.image.tag }}"
+          ports:
+            - containerPort: 80
+          env:
+            - name: GITLAB_OMNIAUTH_ENABLED
+              value: "{{ .Values.gitlab.config.gitlab.omniauth.enabled }}"
+            - name: GITLAB_EXTERNAL_URL
+              value: "{{ .Values.gitlab.config.externalUrl }}"
