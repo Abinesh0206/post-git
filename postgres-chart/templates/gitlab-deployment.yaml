@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab
+  labels:
+    app: gitlab
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      containers:
+      - name: gitlab
+        image: {{ .Values.gitlab.image }}
+        ports:
+        - containerPort: {{ .Values.gitlab.port }}
+        env:
+        - name: GITLAB_OMNIBUS_CONFIG
+          value: |
+            external_url 'http://gitlab.local'
+            gitlab_rails['db_adapter'] = 'postgresql'
+            gitlab_rails['db_host'] = '{{ .Values.postgresql.host }}'
+            gitlab_rails['db_port'] = {{ .Values.postgresql.port }}
+            gitlab_rails['db_username'] = '{{ .Values.postgresql.username }}'
+            gitlab_rails['db_password'] = '{{ .Values.postgresql.password }}'
+            gitlab_rails['db_database'] = '{{ .Values.postgresql.database }}'

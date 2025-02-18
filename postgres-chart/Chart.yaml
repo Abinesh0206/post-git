@@ -1,0 +1,12 @@
+apiVersion: v2
+name: gitlab-postgresql-chart
+description: Helm chart to deploy GitLab and PostgreSQL
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+  - name: postgresql-chart
+    version: 0.1.0
+  - name: gitlab-chart
+    version: 0.1.0

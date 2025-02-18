@@ -1,0 +1,29 @@
+replicaCount: 1
+
+postgresql:
+  image: postgres:15
+  username: gitlab
+  password: 1234
+  database: gitlab_db
+  port: 5432
+
+gitlab:
+  image: gitlab/gitlab-ce:latest
+  port: 80
+
+  postgresql:
+    host: postgresql
+    port: 5432
+    username: gitlab
+    password: 1234
+    database: gitlab_db
+
+  smtp:
+    enabled: true
+    address: smtp.gmail.com
+    port: 587
+    user_name: abinesh0256@gmail.com
+    password: blci disp uhpl mitr
+    domain: gmail.com
+    authentication: login
+    starttls_auto: true
