@@ -1,7 +1,7 @@
 gitlab:
   image:
     repository: gitlab/gitlab-ce
-    tag: "17.7.2"
+    tag: "latest"
   replicaCount: 1
   ingress:
     enabled: true
