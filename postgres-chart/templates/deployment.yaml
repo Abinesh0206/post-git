@@ -17,6 +17,16 @@ spec:
           image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
           ports:
             - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "gitlab_user"  # Set the PostgreSQL user
+            - name: POSTGRES_DB
+              value: "gitlab_db"  # Set the PostgreSQL database name
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret  # Reference the secret for the password
+                  key: password
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-data
