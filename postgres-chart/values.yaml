@@ -1,7 +1,8 @@
+# GitLab configuration
 gitlab:
   image:
     repository: gitlab/gitlab-ce
-    tag: "latest"
+    tag: "latest"  # Use the latest GitLab CE version
   replicaCount: 1
   ingress:
     enabled: true
@@ -19,10 +20,12 @@ gitlab:
     gitlab:
       omniauth:
         enabled: false
+
+# PostgreSQL configuration
 postgresql:
   image:
     repository: postgres
-    tag: "14"
+    tag: "14"  # Tag for PostgreSQL version 14
   replicaCount: 1
   resources:
     requests:
@@ -32,4 +35,16 @@ postgresql:
       cpu: "1"
       memory: "2Gi"
   storage:
-    size: "10Gi"
+    size: "10Gi"  # Size of the storage for PostgreSQL
+
+# PostgreSQL container template configuration
+containers:
+  - name: postgres
+    image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
+    env:
+      - name: POSTGRES_USER
+        value: "gitlab_user"
+      - name: POSTGRES_PASSWORD
+        value: "12345"
+      - name: POSTGRES_DB
+        value: "gitlab_db"
