@@ -2,17 +2,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gitlab-ingress
+  namespace: gitlab
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: {{ .Values.gitlab.ingress.host }}
-      http:
-        paths:
-          - path: {{ .Values.gitlab.ingress.path }}
-            pathType: Prefix
-            backend:
-              service:
-                name: gitlab-service
-                port:
-                  number: 80
+  - host: gitlab.example.com  # Use your domain or external IP
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gitlab-service
+            port:
+              number: 172.20.224.189
+
