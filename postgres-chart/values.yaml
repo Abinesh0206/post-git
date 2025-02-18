@@ -45,6 +45,6 @@ containers:
       - name: POSTGRES_USER
         value: "gitlab_user"
       - name: POSTGRES_PASSWORD
-        value: "12345"
+        value: "Muruga@123"
       - name: POSTGRES_DB
         value: "gitlab_db"
