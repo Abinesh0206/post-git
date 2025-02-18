@@ -6,6 +6,8 @@ postgresql:
   password: 1234
   database: gitlab_db
   port: 5432
+  imagePullSecrets:
+    - my-registry-secret  # Replace with your actual secret name
 
 gitlab:
   image: gitlab/gitlab-ce:latest
