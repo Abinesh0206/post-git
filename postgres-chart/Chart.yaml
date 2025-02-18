@@ -7,5 +7,5 @@ appVersion: "latest"
 
 dependencies:
   - name: postgresql
-    version: "10.3.0"  # Specify the version you need, or leave it for the latest
+    version: "8.0.0"  # Specify the version you need, or leave it for the latest
     repository: "https://charts.helm.sh/stable"
