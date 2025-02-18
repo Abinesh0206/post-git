@@ -22,7 +22,7 @@ gitlab:
 postgresql:
   image:
     repository: postgres
-    tag: "latest"
+    tag: "14-alpine"
   replicaCount: 1
   resources:
     requests:
