@@ -23,7 +23,6 @@ spec:
             - name: POSTGRES_DB
               value: "gitlab_db"  # Set the PostgreSQL database name
             - name: POSTGRES_PASSWORD
-              value: "Muruga@123"
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret  # Reference the secret for the password
