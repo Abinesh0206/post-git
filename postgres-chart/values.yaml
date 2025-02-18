@@ -1,29 +1,35 @@
-replicaCount: 1
-
-postgresql:
-  image: postgres:15
-  username: gitlab
-  password: 1234
-  database: gitlab_db
-  port: 5432
-
 gitlab:
-  image: gitlab/gitlab-ce:latest
-  port: 80
-
-  postgresql:
-    host: postgresql
-    port: 5432
-    username: gitlab
-    password: 1234
-    database: gitlab_db
-
-  smtp:
+  image:
+    repository: gitlab/gitlab-ce
+    tag: "17.7.2"
+  replicaCount: 1
+  ingress:
     enabled: true
-    address: smtp.gmail.com
-    port: 587
-    user_name: abinesh0256@gmail.com
-    password: blci disp uhpl mitr
-    domain: gmail.com
-    authentication: login
-    starttls_auto: true
+    host: "gitlab.example.com"
+    path: /
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+  config:
+    externalUrl: "http://gitlab.example.com"
+    gitlab:
+      omniauth:
+        enabled: false
+postgresql:
+  image:
+    repository: postgres
+    tag: "15-alpine"
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+  storage:
+    size: "10Gi"
