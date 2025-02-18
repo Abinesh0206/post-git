@@ -18,8 +18,6 @@ spec:
       containers:
         - name: postgresql
           image: {{ .Values.postgresql.image }}
-          imagePullSecrets:
-            - name: {{ .Values.postgresql.imagePullSecrets | default "default-secret-name" }}  # Use the correct secret name here
           ports:
             - containerPort: {{ .Values.postgresql.port }}
           env:
