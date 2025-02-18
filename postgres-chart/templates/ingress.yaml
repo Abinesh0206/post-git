@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: gitlab.example.com  # Use your domain or external IP
+  - host: cloudmasa.gitlab.com  # Use your domain or external IP
     http:
       paths:
       - path: /
