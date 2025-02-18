@@ -16,5 +16,5 @@ spec:
           service:
             name: gitlab-service
             port:
-              number: 172.20.224.189
+              number: 80
 
