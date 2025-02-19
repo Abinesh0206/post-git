@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
+  namespace: gitlab
 spec:
   replicas: {{ .Values.postgresql.replicaCount }}
   selector:
@@ -18,21 +19,21 @@ spec:
           ports:
             - containerPort: 5432
           env:
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
-                  key: POSTGRES_USER
+                  key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
-                  key: POSTGRES_PASSWORD
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: database
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-data
