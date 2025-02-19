@@ -36,6 +36,10 @@ postgresql:
       memory: "2Gi"
   storage:
     size: "10Gi"  # Size of the storage for PostgreSQL
+  auth:
+    username: "gitlab"
+    password: "Muruga@123"
+    database: "gitlab_db"
 
 # PostgreSQL container template configuration
 containers:
@@ -43,8 +47,8 @@ containers:
     image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
     env:
       - name: POSTGRES_USER
-        value: "gitlab_user"
+        value: "{{ .Values.postgresql.auth.username }}"
       - name: POSTGRES_PASSWORD
-        value: "Muruga@123"
+        value: "{{ .Values.postgresql.auth.password }}"
       - name: POSTGRES_DB
-        value: "gitlab_db"
+        value: "{{ .Values.postgresql.auth.database }}"
