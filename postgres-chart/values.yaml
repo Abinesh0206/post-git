@@ -60,4 +60,4 @@ containers:
         valueFrom:
           secretKeyRef:
             name: postgres-secret
-            key: database
+            key: database  # Ensure this matches the key in your Secret
