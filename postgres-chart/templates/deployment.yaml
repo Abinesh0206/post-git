@@ -4,7 +4,7 @@ metadata:
   name: postgres
   namespace: gitlab
 spec:
-  replicas: {{ .Values.postgresql.replicaCount }}
+  replicas: 1  # Set to 1 to prevent extra pods
   selector:
     matchLabels:
       app: postgres
