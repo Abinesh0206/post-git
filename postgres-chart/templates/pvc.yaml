@@ -2,10 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
+  namespace: gitlab  # Ensure this matches your GitLab namespace
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.postgresql.storage.size }}
-  storageClassName: standard
+      storage: {{ .Values.postgresql.storage.size }}  # Same as PV
+  storageClassName: standard  # Must match PV
